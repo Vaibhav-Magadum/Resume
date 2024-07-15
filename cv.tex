@@ -1,217 +1,183 @@
-%-----------------------------------------------------------------------------------------------------------------------------------------------%
-%	The MIT License (MIT)
-%
-%	Copyright (c) 2021 Jitin Nair
-%
-%	Permission is hereby granted, free of charge, to any person obtaining a copy
-%	of this software and associated documentation files (the "Software"), to deal
-%	in the Software without restriction, including without limitation the rights
-%	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-%	copies of the Software, and to permit persons to whom the Software is
-%	furnished to do so, subject to the following conditions:
-%	
-%	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-%	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-%	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-%	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-%	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-%	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-%	THE SOFTWARE.
-%	
-%
-%-----------------------------------------------------------------------------------------------------------------------------------------------%
-
-%----------------------------------------------------------------------------------------
-%	DOCUMENT DEFINITION
-%----------------------------------------------------------------------------------------
-
-% article class because we want to fully customize the page and not use a cv template
-\documentclass[a4paper,12pt]{article}
-
-%----------------------------------------------------------------------------------------
-%	FONT
-%----------------------------------------------------------------------------------------
-
-% % fontspec allows you to use TTF/OTF fonts directly
-% \usepackage{fontspec}
-% \defaultfontfeatures{Ligatures=TeX}
-
-% % modified for ShareLaTeX use
-% \setmainfont[
-% SmallCapsFont = Fontin-SmallCaps.otf,
-% BoldFont = Fontin-Bold.otf,
-% ItalicFont = Fontin-Italic.otf
-% ]
-% {Fontin.otf}
-
-%----------------------------------------------------------------------------------------
-%	PACKAGES
-%----------------------------------------------------------------------------------------
+\documentclass[a4paper,10pt]{article}
+\input{glyphtounicode}
+\pdfgentounicode=1
 \usepackage{url}
 \usepackage{parskip} 	
-
-%other packages for formatting
 \RequirePackage{color}
-\RequirePackage{graphicx}
 \usepackage[usenames,dvipsnames]{xcolor}
 \usepackage[scale=0.9]{geometry}
-
-%tabularx environment
+\geometry{margin=0.35in}
 \usepackage{tabularx}
-
-%for lists within experience section
 \usepackage{enumitem}
-
-% centered version of 'X' col. type
 \newcolumntype{C}{>{\centering\arraybackslash}X} 
-
-%to prevent spillover of tabular into next pages
 \usepackage{supertabular}
 \usepackage{tabularx}
 \newlength{\fullcollw}
-\setlength{\fullcollw}{0.47\textwidth}
-
-%custom \section
+\setlength{\fullcollw}{0.2\textwidth}
 \usepackage{titlesec}				
 \usepackage{multicol}
 \usepackage{multirow}
-
-%CV Sections inspired by: 
-%http://stefano.italians.nl/archives/26
 \titleformat{\section}{\Large\scshape\raggedright}{}{0em}{}[\titlerule]
-\titlespacing{\section}{0pt}{10pt}{10pt}
-
-%for publications
-\usepackage[style=authoryear,sorting=ynt, maxbibnames=2]{biblatex}
-
-%Setup hyperref package, and colours for links
+\titlespacing{\section}{0pt}{4pt}{4pt}
 \usepackage[unicode, draft=false]{hyperref}
-\definecolor{linkcolour}{rgb}{0,0.2,0.6}
+\definecolor{linkcolour}{rgb}{0,0.2,0.7}
 \hypersetup{colorlinks,breaklinks,urlcolor=linkcolour,linkcolor=linkcolour}
-\addbibresource{citations.bib}
-\setlength\bibitemsep{1em}
-
-%for social icons
 \usepackage{fontawesome5}
-
-%debug page outer frames
-%\usepackage{showframe}
+% chktex 8
 
 
-% job listing environments
-\newenvironment{jobshort}[2]
-    {
-    \begin{tabularx}{\linewidth}{@{}l X r@{}}
-    \textbf{#1} & \hfill &  #2 \\[3.75pt]
-    \end{tabularx}
-    }
-    {
-    }
-
-\newenvironment{joblong}[2]
-    {
-    \begin{tabularx}{\linewidth}{@{}l X r@{}}
-    \textbf{#1} & \hfill &  #2 \\[3.75pt]
-    \end{tabularx}
-    \begin{minipage}[t]{\linewidth}
-    \begin{itemize}[nosep,after=\strut, leftmargin=1em, itemsep=3pt,label=--]
-    }
-    {
-    \end{itemize}
-    \end{minipage}    
-    }
-
-
-
-%----------------------------------------------------------------------------------------
-%	BEGIN DOCUMENT
-%----------------------------------------------------------------------------------------
 \begin{document}
 
-% non-numbered pages
-\pagestyle{empty} 
 
-%----------------------------------------------------------------------------------------
-%	TITLE
-%----------------------------------------------------------------------------------------
+\pagestyle{empty}
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
 
-% \begin{tabularx}{\linewidth}{ @{}X X@{} }
-% \huge{Your Name}\vspace{2pt} & \hfill \emoji{incoming-envelope} email@email.com \\
-% \raisebox{-0.05\height}\faGithub\ username \ | \
-% \raisebox{-0.00\height}\faLinkedin\ username \ | \ \raisebox{-0.05\height}\faGlobe \ mysite.com  & \hfill \emoji{calling} number
-% \end{tabularx}
+\newcommand{\classesList}[4]{
+    \item\small{
+        {#1 #2 #3 #4 \vspace{-2pt}}
+  }
+}
 
-\begin{tabularx}{\linewidth}{@{} C @{}}
-\Huge{Your Name} \\[7.5pt]
-\href{https://github.com/username}{\raisebox{-0.05\height}\faGithub\ username} \ $|$ \ 
-\href{https://linkedin.com/in/username}{\raisebox{-0.05\height}\faLinkedin\ username} \ $|$ \ 
-\href{https://mysite.com}{\raisebox{-0.05\height}\faGlobe \ mysite.com} \ $|$ \ 
-\href{mailto:email@mysite.com}{\raisebox{-0.05\height}\faEnvelope \ email@mysite.com} \ $|$ \ 
-\href{tel:+000000000000}{\raisebox{-0.05\height}\faMobile \ +00.00.000.000} \\
-\end{tabularx}
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & \textbf{\small #2} \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
 
-%----------------------------------------------------------------------------------------
-% EXPERIENCE SECTIONS
-%----------------------------------------------------------------------------------------
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
 
-%Interests/ Keywords/ Summary
-\section{Summary}
-This CV is automatically generated and deployed using the \href{https://github.com/jitinnair1/autoCV}{autoCV} template along with GitHub Actions such that a new version of the CV is compiled, published and ready for use when the cv.tex file is updated. For details, \href{https://github.com/jitinnair1/autoCV}{click here}.
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{1.001\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & \textbf{\small #2}\\
+    \end{tabular*}\vspace{-7pt}
+}
 
-%Experience
-\section{Work Experience}
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
 
-\begin{jobshort}{Designation}{Jan 2021 - present}
-long long line of blah blah that will wrap when the table fills the column width long long line of blah blah that will wrap when the table fills the column width long long line of blah blah that will wrap when the table fills the column width long long line of blah blah that will wrap when the table fills the column width
-\end{jobshort}
+\renewcommand\labelitemi{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
 
 
-\begin{joblong}{Designation}{Mar 2019 - Jan 2021}
-\item long long line of blah blah that will wrap when the table fills the column width
-\item again, long long line of blah blah that will wrap when the table fills the column width but this time even more long long line of blah blah. again, long long line of blah blah that will wrap when the table fills the column width but this time even more long long line of blah blah
-\end{joblong}
-  
-%Projects
-\section{Projects}
 
-\begin{tabularx}{\linewidth}{ @{}l r@{} }
-\textbf{Some Project} & \hfill \href{https://some-link.com}{Link to Demo} \\[3.75pt]
-\multicolumn{2}{@{}X@{}}{long long line of blah blah that will wrap when the table fills the column width long long line of blah blah that will wrap when the table fills the column width long long line of blah blah that will wrap when the table fills the column width long long line of blah blah that will wrap when the table fills the column width}  \\
-\end{tabularx}
+%----------Header--------------
 
-%----------------------------------------------------------------------------------------
-%	EDUCATION
-%----------------------------------------------------------------------------------------
-\section{Education}
-\begin{tabularx}{\linewidth}{@{}l X@{}}	
-2030 - present & PhD (Subject) at \textbf{University} \hfill \normalsize (GPA: 4.0/4.0) \\
 
-2023 - 2027 & Bachelor's Degree at \textbf{College} \hfill (GPA: 4.0/4.0) \\ 
+  \begin{tabularx}{\linewidth}{@{} C @{}}
 
-2022 & Class 12th Some Board \hfill  (Grades) \\
+    \Huge{Vaibhav Magadum} \\[7.5pt]
 
-2021 & Class 10th Some Board \hfill  (Grades) \\
-\end{tabularx}
+    \href{https://github.com/Vaibhav-Magadum}{\raisebox{-0.05\height}\faGithub\ Vaibhav-Magadum} \ $|$ \ 
+    \href{https://www.linkedin.com/in/vaibhav-magadum-444817265/}{\raisebox{-0.05\height}\faLinkedin\ Vaibhav Magadum} \ $|$ \  \ 
+    \href{mailto:vaibhavmagadum859@gmail.com}{\raisebox{-0.05\height}\faEnvelope \ vaibhavmagadum859@gmail.com} \ $|$ \ 
+    \href{tel:+919380222052}{\raisebox{-0.05\height}\faMobile \ +91 9380222052}
+    \\
+  \end{tabularx}
 
-%----------------------------------------------------------------------------------------
-%	PUBLICATIONS
-%----------------------------------------------------------------------------------------
-\section{Publications}
-\begin{refsection}[citations.bib]
-\nocite{*}
-\printbibliography[heading=none]
-\end{refsection}
 
-%----------------------------------------------------------------------------------------
-%	SKILLS
-%----------------------------------------------------------------------------------------
-\section{Skills}
-\begin{tabularx}{\linewidth}{@{}l X@{}}
-Some Skills &  \normalsize{This, That, Some of this and that etc.}\\
-Some More Skills  &  \normalsize{Also some more of this, Some more that, And some of this and that etc.}\\  
-\end{tabularx}
+%----------Education-----------
 
-\vfill
-\center{\footnotesize Last updated: \today}
 
-\end{document}
+  \section{Education}
+    \resumeSubHeadingListStart
+      \resumeSubheading
+        {Dayananda Sagar College Of Engineering}{SGPA: 9.1}%
+        {B.E in Information Science (VTU)}{2022 -- 2026}
+        \hspace{4pt}
+    \resumeSubHeadingListEnd
+    \resumeSubHeadingListStart
+      \resumeSubheading
+        {Jawahar Navodaya Vidaylaya}{87.6\%}
+        {CBSE --- Higher Secondary/Senior School}{2020 -- 2022} \\
+    \resumeSubHeadingListEnd
+  \vspace{-15pt}
+
+
+%----------Skills--------------
+
+\vspace{6pt}
+  \section{Skills}
+  \begin{tabularx}{\linewidth}{@{}l X@{}}
+    \textbf{Languages:} &  \normalsize{Python, C, C++, JavaScript } \\
+    \textbf{Frameworks/Technologies:}  &  \normalsize{Linux, Git, Github, Flask, VS Code, Docker,React}\\
+  \end{tabularx}
+  \vspace{-5pt}
+
+
+
+
+%----------Projects------------
+
+
+  \section{Projects}
+    
+    \vspace{7pt}
+    
+  \begin{tabularx}{\linewidth}{ @{}l r@{} }
+  \vspace{-5pt}
+    \textbf{Restaurant Management System} \textit{} & \hfill \href{https://github.com/Vaibhav-Magadum/Restaurant-Management-System}{Restaurant Management System}\\
+    \multicolumn{1}{@{}X@{}}{
+    \begin{itemize}
+        \item Showcase of personal and professional projects.
+    \end{itemize}} \vspace{-7pt} \\
+
+    \vspace{-5pt}
+    \textbf{Project Zeta}|\textit{Flask, Supabase} & \hfill \href{https://projectzeta.vercel.app/}{Deployed} \\
+    \multicolumn{1}{@{}X@{}}{
+    \begin{itemize}
+        \item A web platform for teachers where they can create their own ctf like challenges.
+        \item Utilized Flask for backend and Supabase for database.
+        \item Proof of concept for a new way of teaching cybersecurity using a gamified approach.
+    \vspace{-10pt} 
+        \end{itemize} 
+        \vspace{-7pt} 
+        }  \\
+
+\vspace{-5pt}
+    \textbf{Smart Traffic Management System} | \textit{Python, Pyfirmata, ftplib} & \hfill \href{https://github.com/Vaibhav-Magadum/MiniProject}{GitHub} \\
+      \multicolumn{1}{@{}X@{}}{
+        \begin{itemize}
+            \item Utilized computer vision (yolo v8) for adaptive traffic signal control and real-time traffic density calculation.
+            \item Utilized Arduino Uno to control traffic lights, enhancing traffic management and signal synchronization.
+            \item Implemented WLAN data transfer using FTP to send real-time traffic density information for signal and data logging and utilized parallel computing for efficient data processing and traffic management \vspace{-10pt} 
+        \end{itemize}
+            }  \\
+
+
+  \end{tabularx}
+
+
+%----------Achievements---------
+
+
+  \section{Achievements and Certifications}
+
+
+    \begin{tabularx}{\linewidth}{ @{}l r@{} }
+      \textbf{Google Cybersecurity} & \hfill \href{https://www.coursera.org/account/accomplishments/professional-cert/GZJ7LQGCFFZF}{Coursera (Mar 2024)}
+      \\[3.75pt]
+      \multicolumn{2}{@{}X@{}}{An eight course professional certificate program in cybersecurity. Equipped with skills in threat detection, incident response, network security, python automation, SQL etc. }
+    \end{tabularx}
+
+    \begin{tabularx}{\linewidth}{ @{}l r@{} }
+      \textbf{WordPress } & \hfill \href{The%20%22WordPress%20for%20Beginners:%20Step%20by%20Step%20Tutorial%20(2024)%22%20course%20on%20Eduta.org%20teaches%20beginners%20how%20to%20set%20up,%20customize,%20and%20manage%20WordPress%20sites,%20including%20themes,%20plugins,%20and%20essential%20site%20functionalities.}{Eduta (May 2024)}
+      \\[3.75pt]
+      \multicolumn{2}{@{}X@{}}{-	The WordPress course on Eduta.org teaches beginners how to set up, customize, and manage WordPress sites, including themes, plugins, and essential site functionalities. }
+    \end{tabularx}
+
